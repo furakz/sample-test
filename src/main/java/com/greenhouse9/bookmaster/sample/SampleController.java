@@ -39,7 +39,6 @@ public class SampleController {
 			model.addAttribute("book", book2);
 			model.addAttribute("title", book2.getTitle());
 		} catch (IOException e) {
-			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
 		return "sample1";

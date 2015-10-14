@@ -27,7 +27,7 @@ public class JdbcTest {
 			conn = DriverManager.getConnection(strConn);
 			stmt = conn.createStatement();
 
-			String strSql = "SELECT * FROM m_author";
+			//String strSql = "SELECT * FROM m_author";
 			String strSql2 = "SELECT * FROM book";
 			rs=stmt.executeQuery(strSql2);
 
