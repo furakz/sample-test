@@ -1,0 +1,20 @@
+rem インストール手順
+rem ver. 0.1
+
+rem 環境変数設定
+set MYSQL=C:\mysql\bin\mysql.exe
+set USER=bibdev
+set PASS=bibdev
+set HOST=localhost
+set DB=biblio
+set DB_HOME=C:\development\pleiades\workspace\book-master\db
+
+rem テーブル作成
+%MYSQL% -h %HOST% -u%USER% -p%PASS% %DB% <%DB_HOME%/ddl/book-master.sql
+
+rem データ登録
+rem m_book
+set CD=%CD%
+cd %DB_HOME%/data
+%MYSQL% -h %HOST% -u%USER% -p%PASS% %DB% <%DB_HOME%/data/load_book.sql
+cd %CD%

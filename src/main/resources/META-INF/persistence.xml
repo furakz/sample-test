@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+								http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+			version="2.0">
+	<persistence-unit name="book-master">
+		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+		<class>com.greenhouse9.bookmaster.lecture.Book</class>
+		<properties>
+			<property name="eclipselink.target-database" value="MySQL" />
+			<property name="eclipselink.ddl-generation" value="create-tables" />
+			<property name="eclipselink.logging.level" value="INFO" />
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/biblio" />
+			<property name="javax.persistence.jdbc.user" value="bibdev" />
+			<property name="javax.persistence.jdbc.password" value="bibdev" />
+		</properties>
+	</persistence-unit>
+</persistence>

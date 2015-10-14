@@ -1,0 +1,30 @@
+# mysql rootパスワード設定
+C:\mysql\bin\mysql -u root
+use mysql
+SET PASSWORD FOR root@localhost=PASSWORD("aaa");
+
+C:\mysql\bin\mysql -u root mysql
+
+# サーバー起動
+C:\mysql\bin\mysqld
+
+# サーバー停止
+C:\mysql\bin\mysqladmin shutdown -u root -p
+
+■設定
+
+%MYSQL%ディレクトリの設定ファイルmy.iniを作成
+
+my-largeをコピーして名前をmy.iniにする。
+
+[mysqld]セクションに以下の２行を追加する。
+character-set-server = utf8
+skip-character-set-client-handshake
+
+確認方法
+status
+show status;
+show variables like 'char%';
+
+#日本語表示を可能にする。
+SET NAMES cp932;
