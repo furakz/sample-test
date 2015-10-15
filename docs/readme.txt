@@ -18,7 +18,6 @@ select Host,User,Password from mysql.user;
 2. create user
 
 
-
 ## その他コマンド
 # データベース
 
