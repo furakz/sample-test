@@ -1,0 +1,30 @@
+# 2015/10/16
+
+・MySQLのストレージエンジンの確認
+use information_schema;
+select * from tables where = 'book';
+select table_name, engin from tables where = 'book';
+
+多少違う設定になっているかも。
+インストール時に設定する方法はあるのか。
+
+・トランザクション処理の追加
+
+	EntityTransaction tx = em.getTransaction();
+	tx.begin();
+
+	処理
+
+	tx.commit();
+
+・beans-webmvc.xml編集
+
+    xmlns:tx="http://www.springframework.org/schema/tx"
+
+・pom.xml
+  	<dependency>
+  		<groupId>org.springframework</groupId>
+  		<artifactId>spring-tx</artifactId>
+  		<version>4.2.0.RELEASE</version>
+  	</dependency>
+

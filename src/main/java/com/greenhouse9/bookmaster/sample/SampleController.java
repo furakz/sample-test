@@ -6,7 +6,9 @@ import java.io.IOException;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,7 +30,12 @@ public class SampleController {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("book-master");
 		EntityManager em = emf.createEntityManager();
 
+
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
 		em.persist(book);
+		//em.flush();
+		tx.commit();
 
 		em.close();
 		emf.close();
@@ -36,8 +43,10 @@ public class SampleController {
 		try {
 			PreBookDAO dao = new PreBookDAO();
 			Book book2 = dao.getBook();
-			model.addAttribute("book", book2);
-			model.addAttribute("title", book2.getTitle());
+			if (book2 != null) {
+				model.addAttribute("book", book2);
+				model.addAttribute("title", book2.getTitle());
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
