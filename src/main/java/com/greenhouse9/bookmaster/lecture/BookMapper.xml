@@ -9,4 +9,7 @@
   <select id="selectBook2" resultType="com.greenhouse9.bookmaster.lecture.Book">
     select * from book where id = #{id} and title like '%' || #{title} '%'
   </select>
+  <select id="selectAllBooks" resultType="com.greenhouse9.bookmaster.lecture.Book">
+  select * from book
+  </select>
 </mapper>

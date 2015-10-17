@@ -3,22 +3,27 @@ package com.greenhouse9.bookmaster.sample;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import javax.persistence.PersistenceContext;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.greenhouse9.bookmaster.lecture.Book;
+import com.greenhouse9.bookmaster.lecture.BookService;
 import com.greenhouse9.bookmaster.lecture.PreBookDAO;
 
 @Controller
 public class SampleController {
+
+	@Autowired
+	private BookService service;
 
 	@RequestMapping(value="sample", method=GET)
 	public String sample(Model model) {
@@ -47,6 +52,9 @@ public class SampleController {
 				model.addAttribute("book", book2);
 				model.addAttribute("title", book2.getTitle());
 			}
+
+			List<Book> bookList = service.selectAllBook();
+			model.addAttribute("bookList", bookList);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
