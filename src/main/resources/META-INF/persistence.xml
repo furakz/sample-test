@@ -6,7 +6,7 @@
 			version="2.0">
 	<persistence-unit name="book-master">
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-		<class>com.greenhouse9.bookmaster.lecture.Book</class>
+		<class>com.greenhouse9.bookmaster.domain.Book</class>
 		<properties>
 			<property name="eclipselink.target-database" value="MySQL" />
 			<property name="eclipselink.ddl-generation" value="create-tables" />

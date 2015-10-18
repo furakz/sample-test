@@ -9,17 +9,13 @@
 </head>
 <body>
 <h1>Hello World!</h1>
-Hello, Hello, Hello...
-<p>
-Book title is ${title}<br />
-</p>
 <p>
 Book title is ${book.title}
 </p>
 <p>
 <table>
 <c:forEach var="book" items="${bookList}" varStatus="status">
-  <tr><td>${book.id}</td><td>${book.title}</td><td>${book.price}</td></tr>
+  <tr><td><a href="/book-master/book/select/${book.id}">${book.id}</a></td><td>${book.title}</td><td>${book.price}</td></tr>
 </c:forEach>
 </table>
 </p>

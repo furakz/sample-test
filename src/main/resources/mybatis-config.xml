@@ -15,6 +15,6 @@
     </environment>
   </environments>
   <mappers>
-    <mapper resource="com/greenhouse9/bookmaster/lecture/BookMapper.xml"/>
+    <mapper resource="com/greenhouse9/bookmaster/persistence/BookMapper.xml"/>
   </mappers>
 </configuration>

@@ -1,4 +1,4 @@
-package com.greenhouse9.bookmaster.sample;
+package com.greenhouse9.bookmaster.web.controller;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
@@ -13,6 +13,8 @@ import javax.persistence.Persistence;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.greenhouse9.bookmaster.domain.Book;
@@ -20,12 +22,13 @@ import com.greenhouse9.bookmaster.lecture.BookService;
 import com.greenhouse9.bookmaster.lecture.PreBookDAO;
 
 @Controller
-public class SampleController {
+@RequestMapping(value="book")
+public class BookController {
 
 	@Autowired
 	private BookService service;
 
-	@RequestMapping(value="sample", method=GET)
+	@RequestMapping(value="select", method=GET)
 	public String sample(Model model) {
 
 		Book book = new Book();
@@ -73,4 +76,36 @@ public class SampleController {
 		return "sample1";
 	}
 
+
+	@RequestMapping(value="select/{id}", method=GET)
+	public String selectById(@PathVariable Integer id, Model model) {
+
+		try {
+			Book book = service.selectByPrimaryKey(id);
+			model.addAttribute("book", book);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return "sample2";
+	}
+
+	@RequestMapping(value="update", method=POST)
+	public String update(@ModelAttribute Book form, Model model) {
+
+		Book book = null;
+
+		try {
+			book = form;
+			service.update(book);
+
+			model.addAttribute("book", book);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return "redirect:select/" + String.valueOf(book.getId());
+	}
 }

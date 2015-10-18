@@ -10,6 +10,9 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.springframework.stereotype.Service;
 
+import com.greenhouse9.bookmaster.domain.Book;
+import com.greenhouse9.bookmaster.persistence.BookMapper;
+
 @Service
 public class BookService {
 
@@ -28,6 +31,44 @@ public class BookService {
 		session.close();
 
 		return bookList;
+	}
+
+	public Book selectByPrimaryKey(Integer id) throws IOException {
+
+        SqlSession session = getSession();
+
+        mapper = session.getMapper(BookMapper.class);
+		Book book = mapper.selectBook(id);
+
+		session.close();
+
+		return book;
+	}
+
+	public void insert(Book record) throws IOException {
+
+        SqlSession session = getSession();
+
+        mapper = session.getMapper(BookMapper.class);
+
+        mapper.insert(record);
+
+        session.commit();
+		session.close();
+	}
+
+	public int update(Book book) throws IOException {
+
+        SqlSession session = getSession();
+
+        mapper = session.getMapper(BookMapper.class);
+
+		int ret = mapper.updateByPrimaryKey(book);
+
+        session.commit();
+		session.close();
+
+		return ret;
 	}
 
 	private SqlSession getSession() throws IOException{

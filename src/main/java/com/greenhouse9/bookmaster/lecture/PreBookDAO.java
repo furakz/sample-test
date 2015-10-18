@@ -8,6 +8,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
+import com.greenhouse9.bookmaster.domain.Book;
+import com.greenhouse9.bookmaster.persistence.BookMapper;
+
 public class PreBookDAO {
 
 	private String resource = "mybatis-config.xml";

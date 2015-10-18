@@ -1,4 +1,4 @@
-package com.greenhouse9.bookmaster.lecture;
+package com.greenhouse9.bookmaster.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
