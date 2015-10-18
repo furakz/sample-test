@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.greenhouse9.bookmaster.domain.Book;
+import com.greenhouse9.bookmaster.domain.BookHelper;
+import com.greenhouse9.bookmaster.domain.BookInput;
 import com.greenhouse9.bookmaster.lecture.BookService;
 import com.greenhouse9.bookmaster.lecture.PreBookDAO;
 
@@ -92,20 +94,25 @@ public class BookController {
 	}
 
 	@RequestMapping(value="update", method=POST)
-	public String update(@ModelAttribute Book form, Model model) {
+	public String update(@ModelAttribute BookInput form, Model model) {
 
 		Book book = null;
+		BookHelper helper = new BookHelper();
+		System.out.println("TEST: " + form.getPrice());
 
 		try {
-			book = form;
+			book = helper.getBook(form);
 			service.update(book);
 
 			model.addAttribute("book", book);
 
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
+
+			model.addAttribute("book", form);
+			return "sample2";
 		}
 
-		return "redirect:select/" + String.valueOf(book.getId());
+		return "redirect:select/" + form.getId();
 	}
 }
