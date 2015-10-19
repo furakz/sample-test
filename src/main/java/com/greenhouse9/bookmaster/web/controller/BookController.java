@@ -49,7 +49,6 @@ public class BookController {
 		return "sample1";
 	}
 
-
 	@RequestMapping(value="select/{id}", method=GET)
 	public String selectById(@PathVariable Integer id, Model model) {
 
