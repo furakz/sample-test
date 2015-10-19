@@ -13,9 +13,17 @@
 Book title is ${book.title}
 </p>
 <p>
-<table>
+<a href="/book-master/book/edit_new">新規登録</a>
+</p>
+<p>
+<table border="1">
 <c:forEach var="book" items="${bookList}" varStatus="status">
-  <tr><td><a href="/book-master/book/select/${book.id}">${book.id}</a></td><td>${book.title}</td><td>${book.price}</td></tr>
+  <tr>
+    <td><a href="/book-master/book/select/${book.id}">${book.id}</a>
+    </td><td>${book.title}</td>
+    <td>${book.price}</td>
+    <td>${book.nbOfPage}</td>
+  </tr>
 </c:forEach>
 </table>
 </p>

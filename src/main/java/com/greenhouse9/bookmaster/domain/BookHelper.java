@@ -7,9 +7,26 @@ public class BookHelper {
 		Book book = null;
 
 		try {
-			Long id = Long.parseLong(bookInput.getId());
-			Float price = Float.parseFloat(bookInput.getPrice());
-			Integer nbOfPage = Integer.parseInt(bookInput.getNbOfPage());
+
+			Long id;
+			Float price;
+			Integer nbOfPage;
+			if (!isEmpty(bookInput.getId())) {
+				id = Long.parseLong(bookInput.getId());
+			} else {
+				id = null;
+			}
+			if (!isEmpty(bookInput.getPrice())){
+				price = Float.parseFloat(bookInput.getPrice());
+			} else {
+				price = null;
+			}
+			if (!isEmpty(bookInput.getNbOfPage())) {
+				nbOfPage = Integer.parseInt(bookInput.getNbOfPage());
+
+			} else {
+				nbOfPage = null;
+			}
 
 			book = new Book();
 
@@ -25,4 +42,7 @@ public class BookHelper {
 		}
 	}
 
+	private boolean isEmpty(String str){
+		return (str == null || str.length() == 0);
+	}
 }

@@ -5,11 +5,6 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 import java.io.IOException;
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,10 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.greenhouse9.bookmaster.domain.Book;
-import com.greenhouse9.bookmaster.domain.BookHelper;
 import com.greenhouse9.bookmaster.domain.BookInput;
 import com.greenhouse9.bookmaster.lecture.BookService;
-import com.greenhouse9.bookmaster.lecture.PreBookDAO;
 
 @Controller
 @RequestMapping(value="book")
@@ -34,40 +27,18 @@ public class BookController {
 	public String sample(Model model) {
 
 		Book book = new Book();
-		book.setTitle("The door to summer");
-		book.setPrice(12.5F);
 
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("book-master");
-		EntityManager em = emf.createEntityManager();
-
-
-		EntityTransaction tx = em.getTransaction();
-		tx.begin();
-		//em.persist(book);
-		//em.flush();
-		tx.commit();
-
-		em.close();
-		emf.close();
-
-		try {
-			PreBookDAO dao = new PreBookDAO();
-			Book book2 = dao.getBook();
-			if (book2 != null) {
-				model.addAttribute("book", book2);
-				model.addAttribute("title", book2.getTitle());
-			}
-
+	try {
 			book.setTitle("GitHub INSERT");
 			book.setPrice(151F);
 			book.setNbOfPage(100);
-			service.insert(book);
+			//service.insert(book);
 
 			book.setId(1L);
 			book.setTitle("GitHub UPDATE");
 			book.setPrice(150F);
 			book.setNbOfPage(120);
-			service.update(book);
+			//service.update(book);
 
 			List<Book> bookList = service.selectAllBook();
 			model.addAttribute("bookList", bookList);
@@ -93,17 +64,19 @@ public class BookController {
 		return "sample2";
 	}
 
+	@RequestMapping(value="edit_new", method=GET)
+	public String editNew(Model model) {
+
+		return "sample3";
+	}
+
 	@RequestMapping(value="update", method=POST)
 	public String update(@ModelAttribute BookInput form, Model model) {
 
-		Book book = null;
-		BookHelper helper = new BookHelper();
 		System.out.println("TEST: " + form.getPrice());
 
 		try {
-			book = helper.getBook(form);
-			service.update(book);
-
+			Book book = service.update(form);
 			model.addAttribute("book", book);
 
 		} catch (Exception e) {
@@ -114,5 +87,22 @@ public class BookController {
 		}
 
 		return "redirect:select/" + form.getId();
+	}
+
+	@RequestMapping(value="create", method=POST)
+	public String create(@ModelAttribute BookInput form, Model model) {
+
+		try {
+			Book book = service.create(form);
+			model.addAttribute("book", book);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+			model.addAttribute("book", form);
+			return "sample3";
+		}
+
+		return "redirect:edit_new";
 	}
 }

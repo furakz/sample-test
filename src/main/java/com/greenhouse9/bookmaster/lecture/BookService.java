@@ -11,6 +11,8 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.springframework.stereotype.Service;
 
 import com.greenhouse9.bookmaster.domain.Book;
+import com.greenhouse9.bookmaster.domain.BookHelper;
+import com.greenhouse9.bookmaster.domain.BookInput;
 import com.greenhouse9.bookmaster.persistence.BookMapper;
 
 @Service
@@ -69,6 +71,24 @@ public class BookService {
 		session.close();
 
 		return ret;
+	}
+
+	public Book update(BookInput bookInput) throws IOException {
+
+		BookHelper helper = new BookHelper();
+		Book book = helper.getBook(bookInput);
+		update(book);
+
+		return book;
+	}
+
+	public Book create(BookInput bookInput) throws IOException {
+
+		BookHelper helper = new BookHelper();
+		Book book = helper.getBook(bookInput);
+		insert(book);
+
+		return book;
 	}
 
 	private SqlSession getSession() throws IOException{

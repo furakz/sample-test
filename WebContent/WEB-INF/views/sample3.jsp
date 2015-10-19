@@ -10,25 +10,25 @@
 <body>
 <p>
 書籍情報<br />
-<form action="/book-master/book/update" method="post">
+<form action="/book-master/book/create" method="post">
 <table border="1">
   <tr>
     <th>項目</th><th>情報</th>
   </tr>
   <tr>
-    <td>ID</td><td>${book.id} <input type="hidden" name="id" value="${book.id}"></td>
+    <td>ID</td><td></td>
   </tr>
   <tr>
-    <td>タイトル</td><td><input type="text" name="title" value="${book.title}"></td>
+    <td>タイトル</td><td><input type="text" name="title" value=""></td>
   </tr>
   <tr>
-    <td>定価</td><td><input type="text" name="price" value="${book.price}"></td>
+    <td>定価</td><td><input type="text" name="price" value=""></td>
   </tr>
   <tr>
-    <td>ページ数</td><td><input type="text" name="nbOfPage" value="${book.nbOfPage}"></td>
+    <td>ページ数</td><td><input type="text" name="nbOfPage" value=""></td>
   </tr>
 </table>
-  <input type="submit" value="更新">
+  <input type="submit" value="登録">
 </form>
 </p>
 <p>
