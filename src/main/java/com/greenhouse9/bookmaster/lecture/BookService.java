@@ -3,6 +3,7 @@ package com.greenhouse9.bookmaster.lecture;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -28,6 +29,19 @@ public class BookService {
 
         mapper = session.getMapper(BookMapper.class);
 		List<Book> bookList = mapper.selectAllBooks();
+		//List<Book> bookList = null;
+
+		session.close();
+
+		return bookList;
+	}
+
+	public List<Book> selectByCondition(Map<String,Object> conditionMap) throws IOException{
+
+        SqlSession session = getSession();
+
+        mapper = session.getMapper(BookMapper.class);
+		List<Book> bookList = mapper.selectByCondition(conditionMap);
 		//List<Book> bookList = null;
 
 		session.close();

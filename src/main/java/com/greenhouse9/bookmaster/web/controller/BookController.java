@@ -3,7 +3,12 @@ package com.greenhouse9.bookmaster.web.controller;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,7 +33,7 @@ public class BookController {
 
 		Book book = new Book();
 
-	try {
+		try {
 			book.setTitle("GitHub INSERT");
 			book.setPrice(151F);
 			book.setNbOfPage(100);
@@ -103,5 +108,44 @@ public class BookController {
 		}
 
 		return "redirect:edit_new";
+	}
+
+	@RequestMapping(value="search", method=POST)
+	public String search(HttpServletRequest request, Model model) {
+
+		Map<String,String[]> map = request.getParameterMap();
+		Map<String, Object> condMap = new HashMap<String,Object>();
+
+		for(String key: map.keySet()){
+			if (map.get(key).length == 1 && map.get(key)[0].length() > 0) {
+				condMap.put(key, map.get(key)[0]);
+			} else if (map.get(key).length > 1 && containsNonEmpty(map.get(key))) {
+				condMap.put(key, Arrays.<String>asList(map.get(key)));
+			}
+		}
+
+		for(String key: condMap.keySet()){
+			System.out.println("key: " + key + " value: " + condMap.get(key));
+		}
+		try {
+
+			List<Book> bookList = service.selectByCondition(condMap);
+			model.addAttribute("bookList", bookList);
+
+		} catch (IOException e) {
+
+			e.printStackTrace();
+		}
+
+		return "sample1";
+	}
+
+	private boolean containsNonEmpty(String [] array) {
+		for (String str: array){
+			if (str != null && str.length() >0){
+				return true;
+			}
+		}
+		return false;
 	}
 }

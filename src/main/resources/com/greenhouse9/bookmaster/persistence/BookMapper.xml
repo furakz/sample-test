@@ -12,6 +12,23 @@
   <select id="selectAllBooks" resultType="com.greenhouse9.bookmaster.domain.Book">
   select * from book
   </select>
+  <select id="selectByCondition" parameterType="java.util.Map" resultType="com.greenhouse9.bookmaster.domain.Book">
+  select * from book
+  <where>
+    <if test="name != null and name.length() &gt; 0">
+    book.title like concat('%', #{name, javaType=String, jdbcType=VARCHAR}, '%')
+    </if>
+    <if test="nameList != null and nameList.size() &gt; 0">
+    and book.title in
+      <foreach item="item" index="index" collection="nameList" separator="," open="(" close=")">
+      #{item}
+      </foreach>
+    </if>
+    <if test="price != null">
+    book.price = #{price}
+    </if>
+  </where>
+  </select>
   <insert id="insert" >
     <selectKey keyProperty="id" resultType="int" order="BEFORE">
     SELECT MAX(ID)+1 AS ID FROM BOOK
