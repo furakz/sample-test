@@ -65,3 +65,5 @@ select table_name, engin from tables where = 'book';
   </filter-mapping>  <servlet>
 
 
+TO SOLVE
+　環境によりem.persistで登録できない場合がある。

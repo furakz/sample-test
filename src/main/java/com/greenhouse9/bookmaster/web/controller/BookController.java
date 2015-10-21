@@ -46,6 +46,7 @@ public class BookController {
 			//service.update(book);
 
 			List<Book> bookList = service.selectAllBook();
+			System.out.println("PRICE: " + bookList.get(0).getPrice());
 			model.addAttribute("bookList", bookList);
 
 		} catch (IOException e) {
@@ -118,7 +119,13 @@ public class BookController {
 
 		for(String key: map.keySet()){
 			if (map.get(key).length == 1 && map.get(key)[0].length() > 0) {
-				condMap.put(key, map.get(key)[0]);
+				if(key.equals("price")){
+					condMap.put(key, Float.parseFloat(map.get(key)[0]));
+				} else if (key.equals("nbOfPage")) {
+					condMap.put(key, Integer.parseInt(map.get(key)[0]));
+				} else {
+					condMap.put(key, map.get(key)[0]);
+				}
 			} else if (map.get(key).length > 1 && containsNonEmpty(map.get(key))) {
 				condMap.put(key, Arrays.<String>asList(map.get(key)));
 			}

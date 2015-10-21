@@ -28,7 +28,7 @@ select database();
 show databases;
 
 # データベース切り替え
-user dbname;
+use databasename;
 
 # テーブルの一覧
 show tables;

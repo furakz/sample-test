@@ -29,6 +29,9 @@ Book title is ${book.title}
   <tr>
     <th>定価</th><td><input type="text" name="price"></td>
   </tr>
+  <tr>
+    <th>ページ数</th><td><input type="text" name="nbOfPage"></td>
+  </tr>
 </table>
 <input type="submit" value="検索">
 </form>

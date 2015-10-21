@@ -25,7 +25,10 @@
       </foreach>
     </if>
     <if test="price != null">
-    book.price = #{price}
+    and book.price between #{price, javaType=Float,jdbcType=NUMERIC} - 0.0001 and #{price, javaType=Float,jdbcType=NUMERIC} + 0.0001
+    </if>
+    <if test="nbOfPage != null">
+    and book.nbOfPage = #{nbOfPage, javaType=Integer, jdbcType=INTEGER}
     </if>
   </where>
   </select>
