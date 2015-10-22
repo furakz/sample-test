@@ -144,6 +144,8 @@ public class BookController {
 			e.printStackTrace();
 		}
 
+		model.addAttribute("conditionForm", map);
+
 		return "sample1";
 	}
 

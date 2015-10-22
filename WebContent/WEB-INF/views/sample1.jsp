@@ -21,16 +21,18 @@ Book title is ${book.title}
 <form action="/book-master/book/search" method="post">
 <table border="1">
   <tr>
-    <th>名称</th><td><input type="text" name="name"></td>
+    <th>名称</th><td><input type="text" name="name" value="${conditionForm.name[0]}"></td>
   </tr>
   <tr>
-    <th>名称リスト</th><td><input type="text" name="nameList"><input type="text" name="nameList"></td>
+    <th>名称リスト</th>
+    <td><input type="text" name="nameList" value="${conditionForm.nameList[0]}"><input type="text" name="nameList" value="${conditionForm.nameList[1]}">
+    </td>
   </tr>
   <tr>
-    <th>定価</th><td><input type="text" name="price"></td>
+    <th>定価</th><td><input type="text" name="price" value="${conditionForm.price[0]}"></td>
   </tr>
   <tr>
-    <th>ページ数</th><td><input type="text" name="nbOfPage"></td>
+    <th>ページ数</th><td><input type="text" name="nbOfPage" value="${conditionForm.nbOfPage[0]}"></td>
   </tr>
 </table>
 <input type="submit" value="検索">
