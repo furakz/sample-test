@@ -67,3 +67,19 @@ select table_name, engin from tables where = 'book';
 
 TO SOLVE
 　環境によりem.persistで登録できない場合がある。
+
+# 2015/12/02
+ファイルアップロード
+Web.xmlに以下の文言を追加
+
+ <multipart-config>
+  <location>/tmp</location>
+  <max-file-size>1000000</max-file-size>
+  <max-request-size>1000000</max-request-size>
+  <file-size-threshold>10000</file-size-threshold>
+ </multipart-config>
+
+ spring-context.xmlに以下の文言を追加
+ <bean id="multipartResolver"
+ class="org.springframework.web.multipart.support.StandardServletMultipartResolver">
+</bean>
