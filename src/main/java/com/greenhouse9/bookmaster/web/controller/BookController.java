@@ -75,6 +75,11 @@ public class BookController {
 		return "sample3";
 	}
 
+	@RequestMapping(value="edit_upload", method=GET)
+	public String editUpload(Model model){
+		return "sample4";
+	}
+
 	@RequestMapping(value="update", method=POST)
 	public String update(@ModelAttribute BookInput form, Model model) {
 

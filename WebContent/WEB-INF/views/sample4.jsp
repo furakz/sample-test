@@ -5,27 +5,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>書籍マスタ-新規登録</title>
+<title>書籍マスタ-アップロード</title>
 </head>
 <body>
 <p>
 書籍情報<br />
-<form action="/book-master/book/create" method="post">
+<form action="/book-master/book/upload" method="post" enctype="multipart/form-data">
 <table border="1">
   <tr>
-    <th>項目</th><th>情報</th>
-  </tr>
-  <tr>
-    <td>ID</td><td></td>
-  </tr>
-  <tr>
-    <td>タイトル</td><td><input type="text" name="title" value=""></td>
-  </tr>
-  <tr>
-    <td>定価</td><td><input type="text" name="price" value=""></td>
-  </tr>
-  <tr>
-    <td>ページ数</td><td><input type="text" name="nbOfPage" value=""></td>
+    <th>ファイル</th>
+    <td><input type="file" name="dataFile"></td>
   </tr>
 </table>
   <input type="submit" value="登録">
