@@ -33,6 +33,13 @@
       <param-value>/META-INF/spring/beans-webmvc.xml</param-value>
     </init-param>
     <load-on-startup>1</load-on-startup>
+    <!--2012/12/02 add -->
+    <multipart-config>
+      <max-file-size>1000000</max-file-size>
+      <max-request-size>1000000</max-request-size>
+      <file-size-threshold>10000</file-size-threshold>
+    </multipart-config>
+
   </servlet>
 
     <servlet-mapping>

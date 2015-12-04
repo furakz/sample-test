@@ -3,6 +3,9 @@ package com.greenhouse9.bookmaster.web.controller;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -74,6 +77,12 @@ public class BookController {
 
 		return "sample3";
 	}
+
+	@RequestMapping(value="edit_load", method=GET)
+    public String editLoad(Model model) {
+
+    	return "sample4";
+    }
 
 	@RequestMapping(value="edit_upload", method=GET)
 	public String editUpload(Model model){
@@ -152,6 +161,34 @@ public class BookController {
 		model.addAttribute("conditionForm", map);
 
 		return "sample1";
+	}
+
+	@RequestMapping(value="upload", method=POST)
+	public String upload(@ModelAttribute BookInput form, Model model) {
+
+		int ch;
+		char character;
+		StringBuffer sb = new StringBuffer();
+
+		try {
+			InputStream is  = form.getFilename().getInputStream();
+			System.out.println("a:" + form.getFilename().getSize());
+			InputStreamReader isr = new InputStreamReader(is, Charset.forName("UTF-8"));
+
+			while ((ch = isr.read()) != -1){
+				character = (char)ch;
+				sb.append(character);
+				System.out.print(character);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+
+		model.addAttribute("content", sb.toString());
+
+		return "sample4";
 	}
 
 	private boolean containsNonEmpty(String [] array) {

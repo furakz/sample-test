@@ -16,7 +16,7 @@ Book title is ${book.title}
  -->
 <p>
 <a href="/book-master/book/edit_new">新規登録</a>
-<a href="/book-master/book/edit_upload">アップロード</a>
+<a href="/book-master/book/edit_load">アップロード</a>
 </p>
 <div id="conditionArea">
 <form action="/book-master/book/search" method="post">

@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -10,18 +10,25 @@
 <body>
 <p>
 書籍情報<br />
+</p>
+<div id="conditionArea">
 <form action="/book-master/book/upload" method="post" enctype="multipart/form-data">
 <table border="1">
   <tr>
-    <th>ファイル</th>
-    <td><input type="file" name="dataFile"></td>
+    <th>ファイル</th><td><input type="file" name="filename"></td>
   </tr>
 </table>
-  <input type="submit" value="登録">
+<input type="submit" value="アップロード">
 </form>
-</p>
+</div>
 <p>
 <a href="/book-master/book/select">一覧へ</a>
+</p>
+<h2>ファイルの内容</h2>
+<p>
+<pre>
+${content}
+</pre>
 </p>
 </body>
 </html>
