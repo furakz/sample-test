@@ -31,4 +31,8 @@ ${content}
 </pre>
 </p>
 </body>
+<<<<<<< HEAD
 </html>
+=======
+</html>
+>>>>>>> branch 'master' of git@github.com:furakz/sample-test.git
