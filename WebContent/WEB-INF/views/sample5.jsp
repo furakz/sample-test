@@ -8,19 +8,8 @@
 <title>Hello world Page</title>
 </head>
 <body>
-<!--
-<h1>Hello World!</h1>
-<p>
-Book title is ${book.title}
-</p>
- -->
-<p>
-<a href="/book-master/book/edit_new">新規登録</a>
-<a href="/book-master/book/edit_upload">アップロード</a>
-<a href="/book-master/book/sch_download">ダウンロード</a>
-</p>
 <div id="conditionArea">
-<form action="/book-master/book/search" method="post">
+<form action="/book-master/book/download" method="post">
 <table border="1">
   <tr>
     <th>名称</th><td><input type="text" name="name" value="${conditionForm.name[0]}"></td>
@@ -37,20 +26,11 @@ Book title is ${book.title}
     <th>ページ数</th><td><input type="text" name="nbOfPage" value="${conditionForm.nbOfPage[0]}"></td>
   </tr>
 </table>
-<input type="submit" value="検索">
+<input type="submit" value="ダウンロード">
 </form>
 </div>
 <p>
-<table border="1">
-<c:forEach var="book" items="${bookList}" varStatus="status">
-  <tr>
-    <td><a href="/book-master/book/select/${book.id}">${book.id}</a>
-    </td><td>${book.title}</td>
-    <td>${book.price}</td>
-    <td>${book.nbOfPage}</td>
-  </tr>
-</c:forEach>
-</table>
+<a href="/book-master/book/select">一覧へ</a>
 </p>
 </body>
 </html>

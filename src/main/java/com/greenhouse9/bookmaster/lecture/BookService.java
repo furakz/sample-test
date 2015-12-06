@@ -1,9 +1,12 @@
 package com.greenhouse9.bookmaster.lecture;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
+import java.util.StringTokenizer;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -103,6 +106,23 @@ public class BookService {
 		insert(book);
 
 		return book;
+	}
+
+	public void upload(String filepath) {
+
+		try {
+			FileReader fr = new FileReader(filepath);
+			BufferedReader br = new BufferedReader(fr);
+
+			String line;
+			StringTokenizer token;
+
+			while((line = br.readLine()) != null) {
+
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private SqlSession getSession() throws IOException{
