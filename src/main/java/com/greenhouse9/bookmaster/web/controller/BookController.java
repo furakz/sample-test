@@ -271,6 +271,8 @@ public class BookController {
 				}
 			}
 
+			service.upload("C:\\development\\book-master\\app\\temp\\out.txt", "C:\\development\\book-master\\app\\temp\\err.txt");
+
 		} catch (Exception e) {
 			e.printStackTrace();
 

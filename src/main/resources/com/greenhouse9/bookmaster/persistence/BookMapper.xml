@@ -36,6 +36,9 @@
     <selectKey keyProperty="id" resultType="int" order="BEFORE">
     SELECT MAX(ID)+1 AS ID FROM BOOK
     </selectKey>
+    <if test="record.id != null">
+      <bind name="id" value="record.id"></bind>
+    </if>
   INSERT INTO BOOK
   (
     ID,

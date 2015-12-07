@@ -1,9 +1,11 @@
 package com.greenhouse9.bookmaster.lecture;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
@@ -108,20 +110,64 @@ public class BookService {
 		return book;
 	}
 
-	public void upload(String filepath) {
+	public void upload(String filepath, String errpath) {
 
+//		StringTokenizer token;
+		BufferedReader br = null;
 		try {
-			FileReader fr = new FileReader(filepath);
-			BufferedReader br = new BufferedReader(fr);
+//			FileReader fr = new FileReader(filepath);
 
 			String line;
-			StringTokenizer token;
+			String tokenArray [];
+			FileInputStream fis = new FileInputStream(filepath);
+			InputStreamReader fsr = new InputStreamReader(fis, Charset.forName("UTF-8"));
+			br = new BufferedReader(fsr);
 
 			while((line = br.readLine()) != null) {
 
+//				token = new StringTokenizer(line, ",");
+//				BookInput book = new BookInput();
+//				book.setId(token.hasMoreTokens()?token.nextToken():"");
+//				book.setTitle(token.hasMoreTokens()?token.nextToken():"");
+//				book.setPrice(token.hasMoreTokens()?token.nextToken():"");
+//				book.setNbOfPage(token.hasMoreTokens()?token.nextToken():"");
+
+				tokenArray = line.split(",");
+
+				if (tokenArray.length < 4) {
+					continue;
+				}
+
+				BookInput book = new BookInput();
+				book.setId(tokenArray[0]);
+				book.setTitle(tokenArray[1]);
+				book.setPrice(tokenArray[2]);
+				book.setNbOfPage(tokenArray[3]);
+
+				Book book2 = null;
+				try {
+					Integer.parseInt(book.getId());
+					book2 = selectByPrimaryKey(Integer.parseInt(book.getId()));
+				} catch (Exception e){
+
+				}
+
+				if (book2 == null) {
+					create(book);
+				} else {
+					update(book);
+				}
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				if (br != null) {
+					br.close();
+				}
+			} catch (Exception e){
+
+			}
 		}
 	}
 
