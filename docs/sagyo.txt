@@ -84,7 +84,7 @@ Web.xmlに以下の文言を追加
  class="org.springframework.web.multipart.support.StandardServletMultipartResolver">
 </bean>
 
-# 2015/12/02
+# 2015/12/06 Sun.
 ファイルダウンロード
 文字化け対応にてこずる
 RequestMappingのパラメータに
