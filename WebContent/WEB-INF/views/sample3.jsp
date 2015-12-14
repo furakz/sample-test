@@ -10,6 +10,7 @@
 <body>
 <p>
 書籍情報<br />
+<div>${message}</div>
 <form action="/book-master/book/create" method="post">
 <table border="1">
   <tr>
@@ -19,13 +20,13 @@
     <td>ID</td><td></td>
   </tr>
   <tr>
-    <td>タイトル</td><td><input type="text" name="title" value=""></td>
+    <td>タイトル</td><td><input type="text" name="title" value="${book.title}"></td>
   </tr>
   <tr>
-    <td>定価</td><td><input type="text" name="price" value=""></td>
+    <td>定価</td><td><input type="text" name="price" value="${book.price}"></td>
   </tr>
   <tr>
-    <td>ページ数</td><td><input type="text" name="nbOfPage" value=""></td>
+    <td>ページ数</td><td><input type="text" name="nbOfPage" value="${book.nbOfPage}"></td>
   </tr>
 </table>
   <input type="submit" value="登録">

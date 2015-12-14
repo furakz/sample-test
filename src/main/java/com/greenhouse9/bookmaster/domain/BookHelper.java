@@ -9,6 +9,10 @@ public class BookHelper {
 
 	private List<AppError> errorList = new ArrayList<AppError>();
 
+	public List<AppError> getErrors () {
+		return errorList;
+	}
+
 	public void bind(BookInput bookInput, Book book) {
 
 		if (book == null){
@@ -17,6 +21,8 @@ public class BookHelper {
 
 		boolean isValid = true;
 		AppError err;
+
+		errorList.clear();
 
 		//id
 		Long id = null;
@@ -64,7 +70,7 @@ public class BookHelper {
 			book.setTitle(title);
 		}
 
-		//price prec 9, scale 2
+		//price (prec 9, scale 2)
 		isValid = true;
 		Float price = null;
 		if (!isEmpty(bookInput.getPrice())) {
@@ -90,6 +96,35 @@ public class BookHelper {
 			book.setPrice(price);
 		}
 
+		//page [0 , 999999]
+		isValid = true;
+		Integer nbOfPage = null;
+		if (!isEmpty(bookInput.getNbOfPage())) {
+
+				try {
+					nbOfPage = Integer.parseInt(bookInput.getNbOfPage());
+					if (nbOfPage < 0) {
+						isValid = false;
+						err = new AppError();
+						err.setErrorMessage("nbOfPage is negative");
+						errorList.add(err);
+					}
+					if (nbOfPage > 999999) {
+						isValid = false;
+						err = new AppError();
+						err.setErrorMessage("nbOfPage is too big (max 999999)");
+						errorList.add(err);
+					}
+				} catch (Exception e) {
+					isValid = false;
+					err = new AppError();
+					err.setErrorMessage("nbOfPage is not Integer");
+					errorList.add(err);
+				}
+		}
+		if(isValid){
+			book.setNbOfPage(nbOfPage);
+		}
 
 }
 

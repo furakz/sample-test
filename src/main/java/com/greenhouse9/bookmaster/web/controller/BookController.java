@@ -23,8 +23,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.greenhouse9.bookmaster.common.AppError;
 import com.greenhouse9.bookmaster.domain.Book;
+import com.greenhouse9.bookmaster.domain.BookHelper;
 import com.greenhouse9.bookmaster.domain.BookInput;
 import com.greenhouse9.bookmaster.lecture.BookService;
 
@@ -129,11 +132,25 @@ public class BookController {
 	}
 
 	@RequestMapping(value="create", method=POST)
-	public String create(@ModelAttribute BookInput form, Model model) {
+	public String create(@ModelAttribute BookInput form, Model model, RedirectAttributes attributes) {
 
 		try {
-			Book book = service.create(form);
-			model.addAttribute("book", book);
+			//Book book = service.create(form);
+			Book book = null;
+			BookHelper bookHelper = new BookHelper();
+			bookHelper.bind(form, book);
+
+			if (bookHelper.hasErrors()) {
+				String message = "error occured! <br />";
+
+				for (AppError err:bookHelper.getErrors()){
+					message = message + err.getErrorMessage() + "<br />";
+				}
+				attributes.addFlashAttribute("message", message);
+				attributes.addFlashAttribute("book", form);
+			} else {
+				book = service.create(form);
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
