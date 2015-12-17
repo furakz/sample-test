@@ -46,7 +46,6 @@ public class BookService {
 
         mapper = session.getMapper(BookMapper.class);
 		List<Book> bookList = mapper.selectByCondition(conditionMap);
-		//List<Book> bookList = null;
 
 		session.close();
 
